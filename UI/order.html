@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Order Management</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="./index.html">Customer</a></li>
+                <li class="nav-item"><a class="nav-link" href="item.html">Item</a></li>
+                <li class="nav-item"><a class="nav-link" href="order.html">PlaceOrder</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Order Form -->
+        <div class="col-md-5">
+            <div class="card p-3">
+                <h5 class="text-center">New Order</h5>
+                <form>
+                    <div class="mb-2">
+                        <label for="orderId" class="form-label">Order ID</label>
+                        <input type="text" class="form-control" id="orderId">
+                    </div>
+                    <div class="mb-2">
+                        <label for="orderDate" class="form-label">Order Date</label>
+                        <input type="date" class="form-control" id="orderDate">
+                    </div>
+                    <div class="mb-2">
+                        <label for="customerId" class="form-label">Customer ID</label>
+                        <input type="text" class="form-control" id="customerId">
+                    </div>
+                    <div class="mb-2">
+                        <label for="itemId" class="form-label">Item ID</label>
+                        <input type="text" class="form-control" id="itemId">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="itemPrice" class="form-label">Item Price</label>
+                        <input type="text" class="form-control" id="itemPrice">
+                    </div>
+                    <div class="mb-2">
+                        <label for="orderQuantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="orderQuantity">
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-success btn-sm" id="btnSave">place Order</button>
+                        <button type="button" class="btn btn-info btn-sm" id="btnViewAll">View Orders</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Order Table -->
+        <div class="col-md-7">
+            <div class="card p-3">
+                <h5 class="text-center">Order List</h5>
+                <table class="table table-sm table-striped table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer ID</th>
+                        <th>Item ID</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody id="orderTableBody">
+                    <!-- Dynamic rows will be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./lib/jquery-3.7.1.min.js"></script>
+<script src="order.js"></script>
+</body>
+</html>

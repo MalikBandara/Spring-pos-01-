@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Item</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compact Form with Table</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container, .table-container {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 350px;
+      width: 100%;
+    }
+    .table-container {
+      max-width: 450px;
+    }
+    .navbar {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Item  Management</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="./index.html">Customer</a></li>
+        <li class="nav-item"><a class="nav-link" href="item.html">Item</a></li>
+        <li class="nav-item"><a class="nav-link" href="order.html">PlaceOrder</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-3">
+  <div class="row">
+    <!-- Form Section -->
+    <div class="col-md-4">
+      <div class="form-container">
+        <h5 class="text-center">Item</h5>
+        <form>
+          <div class="mb-2">
+            <label for="itemId" class="form-label">item ID</label>
+            <input type="text" class="form-control" id="itemId">
+          </div>
+          <div class="mb-2">
+            <label for="itemName" class="form-label">item Name</label>
+            <input type="text" class="form-control" id="itemName">
+          </div>
+          <div class="mb-2">
+            <label for="price" class="form-label">price</label>
+            <input type="text" class="form-control" id="price">
+          </div>
+          <div class="mb-2">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="text" class="form-control" id="quantity">
+          </div>
+          <div class="d-grid gap-1">
+            <button type="button" class="btn btn-success btn-sm" id="btnSave">Save</button>
+            <button type="button" class="btn btn-warning btn-sm" id="btnUpdate">Update</button>
+            <button type="button" class="btn btn-danger btn-sm" id="btnDelete">Delete</button>
+            <button type="button" class="btn btn-info btn-sm" id="btnViewAll">View All</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="col-md-5">
+      <div class="table-container">
+        <h5 class="text-center">Item List</h5>
+        <table class="table table-sm table-striped table-bordered">
+          <thead class="table-dark">
+          <tr>
+            <th>item id </th>
+            <th>item Name</th>
+            <th>price</th>
+            <th>quantity</th>
+          </tr>
+          </thead>
+          <tbody id="userTableBody">
+          <!-- Dynamic rows will be added here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./lib/jquery-3.7.1.min.js"></script>
+
+<script src="item.js"></script>
+
+</body>
+</html>
