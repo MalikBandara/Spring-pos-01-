@@ -2,6 +2,7 @@ package org.example.springboot01.service.impl;
 
 
 import jakarta.transaction.Transactional;
+import org.example.springboot01.dto.ItemDto;
 import org.example.springboot01.dto.OrderDTO;
 import org.example.springboot01.dto.OrderDetailsDTO;
 import org.example.springboot01.entity.Customer;
@@ -13,11 +14,13 @@ import org.example.springboot01.repo.ItemRepo;
 import org.example.springboot01.repo.OrderDetailRepo;
 import org.example.springboot01.repo.OrderRepo;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaceOrderServiceImpl {
@@ -77,5 +80,22 @@ public class PlaceOrderServiceImpl {
         }
     }
 
+
+    public List<OrderDTO> getAll() {
+        return mapper.map(orderRepo.findAll(), new TypeToken<List<OrderDTO>>(){}.getType());
+
+    }
+
+    public List<OrderDetailsDTO> getAllDetails() {
+        return orderDetailRepo.findAll().stream().map(orderDetail -> {
+            OrderDetailsDTO dto = new OrderDetailsDTO();
+            dto.setId(orderDetail.getId());
+            dto.setOrders(orderDetail.getOrders().getOrderId());
+            dto.setItem(orderDetail.getItem().getId()); // Extract itemId instead of entire Item object
+            dto.setQty(orderDetail.getQty());
+            dto.setUnitPrice(orderDetail.getUnitPrice());
+            return dto;
+        }).collect(Collectors.toList());
+    }
 
 }

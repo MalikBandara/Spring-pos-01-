@@ -45,3 +45,63 @@ $('#btnSave').click(function () {
         }
     });
 });
+
+
+$("#btnViewAll").click(function () {
+    $.ajax({
+        url: "http://localhost:8080/api/v1/Order/getAll", // API endpoint
+        type: "GET",
+        dataType: "json", // Expect JSON response
+        success: function (order) {
+            let tableBody = $("#orderTableBody");
+            tableBody.empty(); // Clear previous data
+
+            order.data.forEach(order => {
+                let row = `<tr>
+                    <td>${order.orderId}</td>
+                    <td>${order.date}</td>
+                    <td>${order.total}</td>
+                    <td>${order.customerId}</td>
+                </tr>`;
+                tableBody.append(row); // Append new row
+            });
+
+            alert("item data loaded successfully!");
+        },
+        error: function (xhr) {
+            alert("Error loading customer data: " + xhr.responseText);
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+const  loadALL =  () => {
+    $.ajax({
+        url: "http://localhost:8080/api/v1/OrderDetail/getAll", // API endpoint
+        type: "GET",
+        dataType: "json", // Expect JSON response
+        success: function (order) {
+            let tableBody = $("#orderDetailsTableBody");
+            tableBody.empty(); // Clear previous data
+
+            order.data.forEach(order => {
+                let row = `<tr>
+                    <td>${order.id}</td>
+                    <td>${order.qty}</td>
+                    <td>${order.unitPrice}</td>
+                    <td>${order.item}</td>
+                    <td>${order.orders}</td>
+                    
+                </tr>`;
+                tableBody.append(row); // Append new row
+            });
+
+
+        },
+        error: function (xhr) {
+            alert("Error loading customer data: " + xhr.responseText);
+            console.error(xhr.responseText);
+        }
+    });
+}
+loadALL();

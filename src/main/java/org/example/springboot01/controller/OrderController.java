@@ -24,4 +24,11 @@ public class OrderController {
             placeOrderService.placeOrder(orderDTO);
             return new ResponseUtil(200, "place order " , null);
     }
+
+    @GetMapping("getAll")
+    public ResponseUtil getAll(){
+
+
+        return new ResponseUtil(200, "Load order " , placeOrderService.getAll());
+    }
 }
