@@ -27,25 +27,21 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Transactional
-    public boolean saveCustomer(CustomerDto customerDto) {
+    public void saveCustomer(CustomerDto customerDto) {
 //        Customer customer = new Customer(customerDto.getId(), customerDto.getName(), customerDto.getAddress());
-        Customer customer = modelMapper.map(customerDto, Customer.class);
-        if (customerRepo.existsById(customer.getId())){
-            throw  new RuntimeException();
+        if (customerRepo.existsById(customerDto.getId())){
+            throw  new RuntimeException("customer already exist");
         }
-        customerRepo.save(customer);
-        return true;
-
+        customerRepo.save(modelMapper.map(customerDto, Customer.class));
     }
 
 
 
-    public boolean deleteCustomer(Integer id) {
+    public void deleteCustomer(Integer id) {
         if (customerRepo.existsById(id)) { // Check if customer exists
             customerRepo.deleteById(id);   // Delete by ID
-            return true;
         }
-        return false; // Return false if customer doesn't exist
+
     }
 
     public boolean updateCustomer(CustomerDto customerDto) {

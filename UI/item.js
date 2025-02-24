@@ -91,7 +91,7 @@ $("#btnViewAll").click(function () {
             let tableBody = $("#userTableBody");
             tableBody.empty(); // Clear previous data
 
-            customers.forEach(customer => {
+            customers.data.forEach(customer => {
                 let row = `<tr>
                     <td>${customer.id}</td>
                     <td>${customer.name}</td>

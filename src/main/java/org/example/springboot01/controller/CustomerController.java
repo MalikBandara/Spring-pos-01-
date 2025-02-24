@@ -22,12 +22,8 @@ public class CustomerController {
 
     @PostMapping("save")
     private ResponseUtil saveCus(@RequestBody CustomerDto customerDto){
-        boolean b = customerService.saveCustomer(customerDto);
-        if (b) {
-            return new ResponseUtil(201, "Customer Saved !", null);
-        }else {
-            return new ResponseUtil(200 , "Exist Customer" , null);
-        }
+         customerService.saveCustomer(customerDto);
+         return new ResponseUtil(201, "Customer Saved !", null);
     }
 
 

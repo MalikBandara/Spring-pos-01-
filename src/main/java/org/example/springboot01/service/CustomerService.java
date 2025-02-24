@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface CustomerService {
 
-    boolean saveCustomer(CustomerDto customerDto) ;
+    void saveCustomer(CustomerDto customerDto) ;
 
-    public boolean deleteCustomer(Integer id) ;
+    public void deleteCustomer(Integer id) ;
 
      boolean updateCustomer(CustomerDto customerDto) ;
 

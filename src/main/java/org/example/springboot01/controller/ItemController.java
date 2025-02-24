@@ -3,6 +3,7 @@ package org.example.springboot01.controller;
 
 import org.example.springboot01.dto.ItemDto;
 import org.example.springboot01.service.impl.ItemServiceImpl;
+import org.example.springboot01.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,29 +23,29 @@ public class ItemController {
     private ModelMapper modelMapper;
 
     @PostMapping("save")
-    private boolean saveItem(@RequestBody ItemDto itemDto){
-        boolean b = itemService.saveItem(itemDto);
-        return b;
+    private ResponseUtil saveItem(@RequestBody ItemDto itemDto){
+        itemService.saveItem(itemDto);
+        return  new ResponseUtil(200 , "Item save successfully ",null );
     }
 
 
     @DeleteMapping("delete/{id}")
-    private boolean deleteItem(@PathVariable Integer id ){
-        boolean b = itemService.deleteItem(id);
-        return b;
+    private ResponseUtil deleteItem(@PathVariable Integer id ){
+         itemService.deleteItem(id);
+         return  new ResponseUtil(200 , "Item Delete successfully" , null);
+
     }
 
 
     @PutMapping("update")
-    private boolean updateItem(@RequestBody ItemDto itemDto){
-        boolean b = itemService.updateItem(itemDto);
-        return b;
+    private ResponseUtil updateItem(@RequestBody ItemDto itemDto){
+         itemService.updateItem(itemDto);
+         return  new ResponseUtil(200 , "Item update successfully" , null );
     }
 
     @GetMapping("getAll")
-    private List<ItemDto> getAllItem(){
-        List<ItemDto> allItem = itemService.getAllCustomer();
-        return allItem;
+    private ResponseUtil getAllItem(){
+        return  new ResponseUtil(200 , "item load" ,  itemService.getAllCustomer());
 
     }
 
