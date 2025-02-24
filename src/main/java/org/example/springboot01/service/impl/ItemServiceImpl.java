@@ -5,6 +5,9 @@ import org.example.springboot01.dto.ItemDto;
 import org.example.springboot01.entity.Item;
 import org.example.springboot01.repo.ItemRepo;
 import org.example.springboot01.service.ItemService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,50 +21,41 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     public ItemRepo itemRepo;
-    public boolean saveItem(ItemDto itemDto) {
 
-        Item item = new Item(itemDto.getId(), itemDto.getName(), itemDto.getPrice(), itemDto.getQty());
-        itemRepo.save(item);
-        return true;
+
+    @Autowired
+    private ModelMapper modelMapper;
+    public void saveItem(ItemDto itemDto) {
+
+        if (itemRepo.existsById(itemDto.getId())){
+            throw  new RuntimeException("item already exist");
+        }
+//        Item item = new Item(itemDto.getId(), itemDto.getName(), itemDto.getPrice(), itemDto.getQty());
+        itemRepo.save(modelMapper.map(itemDto , Item.class));
+
     }
 
 
 
-    public boolean deleteItem(Integer id) {
+    public void deleteItem(Integer id) {
         if (itemRepo.existsById(id)) { // Check if customer exists
             itemRepo.deleteById(id);   // Delete by ID
-            return true;
+
         }
-        return false; // Return false if customer doesn't exist
+
     }
 
-    public boolean updateItem(ItemDto itemDto) {
-        Optional<Item> existingItem = itemRepo.findById(itemDto.getId());
+    public void updateItem(ItemDto itemDto) {
 
-        if (existingItem.isPresent()){
-            Item item = existingItem.get();
-
-            item.setName(itemDto.getName());
-            item.setPrice(itemDto.getPrice());
-            item.setQty(itemDto.getQty());
-
-            itemRepo.save(item);
-            return true;
+        if (itemRepo.existsById(itemDto.getId())){
+            itemRepo.save(modelMapper.map(itemDto, Item.class));
         }
-        return false;
+        throw new RuntimeException("item does not exist ");
 
     }
 
 
     public List<ItemDto> getAllCustomer() {
-        List<Item> all = itemRepo.findAll();
-        List<ItemDto> itedto = new ArrayList<>();
-
-        for (Item item : all) {
-            ItemDto dto = new ItemDto(item.getId(), item.getName(),item.getPrice(), item.getQty());
-            itedto.add(dto);
-        }
-
-        return itedto;
+        return modelMapper.map(itemRepo.findAll(), new TypeToken<List<ItemDto>>(){}.getType());
     }
 }

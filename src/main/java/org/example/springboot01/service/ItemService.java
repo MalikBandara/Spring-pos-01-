@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemService {
-    public boolean saveItem(ItemDto itemDto) ;
+    public void saveItem(ItemDto itemDto) ;
 
-    public boolean deleteItem(Integer id) ;
+    public void deleteItem(Integer id) ;
 
-    public boolean updateItem(ItemDto itemDto) ;
+    public void updateItem(ItemDto itemDto) ;
 
 
     public List<ItemDto> getAllCustomer() ;
