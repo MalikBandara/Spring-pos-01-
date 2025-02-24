@@ -24,8 +24,6 @@ public class CustomerController {
     private ResponseUtil saveCus(@RequestBody CustomerDto customerDto){
         boolean b = customerService.saveCustomer(customerDto);
         if (b) {
-
-
             return new ResponseUtil(201, "Customer Saved !", null);
         }else {
             return new ResponseUtil(200 , "Exist Customer" , null);
@@ -34,24 +32,23 @@ public class CustomerController {
 
 
     @DeleteMapping("delete/{id}")
-    private boolean deleteCustomer(@PathVariable Integer id ){
-        boolean b = customerService.deleteCustomer(id);
-        return b;
+    private ResponseUtil deleteCustomer(@PathVariable Integer id ){
+         customerService.deleteCustomer(id);
+         return  new ResponseUtil(200,"Customer Delete" , null);
     }
 
 
     @PutMapping("update")
-    private boolean updateCustomer(@RequestBody CustomerDto customerDto){
-        boolean b = customerService.updateCustomer(customerDto);
-        return b;
+    private ResponseUtil updateCustomer(@RequestBody CustomerDto customerDto){
+         customerService.updateCustomer(customerDto);
+         return new ResponseUtil(200 , "Customer Update" , null );
+
     }
 
 
     @GetMapping("getAll")
-    private List<CustomerDto> getAllCustomer(){
-        List<CustomerDto> allCustomer = customerService.getAllCustomer();
-        return allCustomer;
-
+    private ResponseUtil getAllCustomer(){
+        return new ResponseUtil(200 , "Customer List" ,customerService.getAllCustomer());
     }
 
 

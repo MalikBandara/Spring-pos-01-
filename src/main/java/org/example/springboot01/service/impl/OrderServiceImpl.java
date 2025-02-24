@@ -9,7 +9,6 @@ import org.example.springboot01.entity.Order;
 import org.example.springboot01.repo.CustomerRepo;
 import org.example.springboot01.repo.ItemRepo;
 import org.example.springboot01.repo.OrderRepo;
-import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

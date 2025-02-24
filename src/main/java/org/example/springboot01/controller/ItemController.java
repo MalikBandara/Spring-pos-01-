@@ -3,6 +3,7 @@ package org.example.springboot01.controller;
 
 import org.example.springboot01.dto.ItemDto;
 import org.example.springboot01.service.impl.ItemServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,10 @@ public class ItemController {
 
     @Autowired
     private ItemServiceImpl itemService;
+
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping("save")
     private boolean saveItem(@RequestBody ItemDto itemDto){

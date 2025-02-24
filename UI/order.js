@@ -28,31 +28,7 @@ $("#btnSave").click(function () {
 });
 
 
-$("#btnUpdate").click(function () {
-    let customerData = {
-        id: $("#itemId").val(),
-        name: $("#itemName").val(),
-        price: $("#price").val(),
-        qty: $("#quantity").val(),
 
-    };
-
-    $.ajax({
-        url: "http://localhost:8080/api/v1/item/update", // Corrected URL
-        type: "PUT",
-        contentType: "application/json",  // Ensure JSON format
-        data: JSON.stringify(customerData),  // Convert to JSON
-        dataType: "json",  // Expect JSON response
-        success: function (response) {
-            alert("item updated successfully!");
-            console.log("Updated item:", response);
-        },
-        error: function (xhr) {
-            alert("Error updating customer: " + xhr.responseText);
-            console.error(xhr.responseText);
-        }
-    });
-});
 
 
 //delete done

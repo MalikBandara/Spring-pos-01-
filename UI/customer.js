@@ -85,17 +85,16 @@
             url: "http://localhost:8080/api/v1/customer/getAll", // API endpoint
             type: "GET",
             dataType: "json", // Expect JSON response
-            success: function (customers) {
+            success: function (response) {
                 let tableBody = $("#userTableBody");
                 tableBody.empty(); // Clear previous data
 
-                customers.forEach(customer => {
+                response.data.forEach(customer => {  // Use response.data instead of customers
                     let row = `<tr>
-                    <td>${customer.id}</td>
-                    <td>${customer.name}</td>
-                    <td>${customer.address}</td>
-                    
-                </tr>`;
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.address}</td>
+            </tr>`;
                     tableBody.append(row); // Append new row
                 });
 
