@@ -2,24 +2,26 @@ package org.example.springboot01.controller;
 
 
 import org.example.springboot01.dto.OrderDTO;
-import org.example.springboot01.service.impl.OrderServiceImpl;
+import org.example.springboot01.service.impl.PlaceOrderServiceImpl;
+import org.example.springboot01.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("api/v1/order")
+@RequestMapping("api/v1/Order")
 public class OrderController {
 
 
+
     @Autowired
-    private OrderServiceImpl orderService;
+    private PlaceOrderServiceImpl placeOrderService;
 
 
     @PostMapping("save")
-    private boolean placeOrder(@RequestBody OrderDTO orderDTO){
-        boolean b = orderService.placeOrder(orderDTO);
-        return b;
+    public ResponseUtil saveOrder(@RequestBody OrderDTO orderDTO){
+
+            placeOrderService.placeOrder(orderDTO);
+            return new ResponseUtil(200, "place order " , null);
     }
 }
-

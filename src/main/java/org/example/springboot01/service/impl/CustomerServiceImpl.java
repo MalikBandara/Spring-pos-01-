@@ -26,7 +26,6 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepo customerRepo;
 
 
-    @Transactional
     public void saveCustomer(CustomerDto customerDto) {
 //        Customer customer = new Customer(customerDto.getId(), customerDto.getName(), customerDto.getAddress());
         if (customerRepo.existsById(customerDto.getId())){
