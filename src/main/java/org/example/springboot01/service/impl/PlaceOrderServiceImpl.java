@@ -77,6 +77,8 @@ public class PlaceOrderServiceImpl {
 
             // 6. Save OrderDetails
             orderDetailRepo.save(orderDetails);
+
+            itemRepo.updateQty(item.getId(), orderDetailsDTO.getQty());
         }
     }
 
