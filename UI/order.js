@@ -105,3 +105,26 @@ const  loadALL =  () => {
     });
 }
 loadALL();
+
+
+$('#addToCartBtn').click(function () {
+
+    const orderDate = $('#orderDate').val();
+    const customerId = parseInt($('#customerId').val());
+    const itemId = $('#itemId').val();
+    const itemPrice = parseFloat($('#itemPrice').val());
+    const orderQuantity = parseInt($('#orderQuantity').val());
+    const total = orderQuantity * itemPrice;
+
+    $('#orderTableBody').append(`<tr>
+
+         <td>${orderDate}</td>
+         <td>${customerId}</td>
+         <td>${itemId}</td>
+         <td>${itemPrice}</td>
+         <td>${orderQuantity}</td>
+         <td>${total}</td>
+
+   </tr>`)
+
+})

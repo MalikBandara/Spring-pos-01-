@@ -46,7 +46,7 @@ public class PlaceOrderServiceImpl {
 
     @Transactional
     public void placeOrder(OrderDTO orderDTO) {
-        // 1. Convert OrderDTO to Orders entity
+
         Orders orders = new Orders();
         orders.setDate(orderDTO.getDate());
         Customer customer = customerRepo.findById(orderDTO.getCustomerId())
@@ -56,26 +56,26 @@ public class PlaceOrderServiceImpl {
 
         orders.setTotal(orderDTO.getTotal());
 
-        // 2. Save Orders first and get the persisted instance
+
         Orders savedOrder = orderRepo.save(orders);
 
 
-        // 3. Process OrderDetails
+
         List<OrderDetailsDTO> orderDetailsList = orderDTO.getOrderDetailsList();
 
         for (OrderDetailsDTO orderDetailsDTO : orderDetailsList) {
-            // 4. Fetch the Item entity
+
             Item item = itemRepo.findById(orderDetailsDTO.getItem())
                     .orElseThrow(() -> new RuntimeException("Item not found: " + orderDetailsDTO.getItem()));
 
-            // 5. Create a new OrderDetails entity
+
             OrderDetails orderDetails = new OrderDetails();
             orderDetails.setItem(item);
             orderDetails.setOrders(savedOrder);
             orderDetails.setQty(orderDetailsDTO.getQty());
             orderDetails.setUnitPrice(orderDetailsDTO.getUnitPrice());
 
-            // 6. Save OrderDetails
+
             orderDetailRepo.save(orderDetails);
 
             itemRepo.updateQty(item.getId(), orderDetailsDTO.getQty());
